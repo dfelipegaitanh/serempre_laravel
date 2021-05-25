@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        City::factory(10)
-            ->hasClients(8)
+        City::factory(config('serempre.seeds.cities'))
+            ->hasClients(config('serempre.seeds.clients'))
             ->create();
     }
 }
