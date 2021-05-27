@@ -44,15 +44,17 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        User::create([
+        $user = User::create([
             'name'     => $request->get('name'),
             'email'    => $request->get('email'),
             'password' => '',
         ]);
 
-        return $request->wantsJson()
-            ? new JsonResponse([], 201)
-            : redirect($this->redirectPath());
+        return redirect( )
+            ->route('login')
+            ->withSuccess("Se ha creado el usuario '{$user->email}' ")
+            ->withInfo("Tambien se le envio un correo para establecer la contraseña")
+            ->withInput();
     }
 
     public function redirectPath()

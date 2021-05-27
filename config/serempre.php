@@ -6,5 +6,5 @@ return [
         'clients' => 5,
         'users'   => 10,
     ],
-    'queue' => '30'
+    'queue' => '10'
 ];
