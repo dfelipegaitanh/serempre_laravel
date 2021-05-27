@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CityRequest;
-use App\Models\City;
+use App\Http\Requests\ClientRequest;
+use App\Models\Client;
+use Illuminate\Http\Request;
 
-class CityController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +15,10 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::orderBy('id')
+        $clients = Client::orderBy('id')
             ->paginate(config('serempre.pagination'));
 
-        return view('cities.index', compact('cities'))
+        return view('clients.index', compact('clients'))
             ->with('i', (request()->input('page', 1) - 1) * config('serempre.pagination'));
     }
 
@@ -28,80 +29,79 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('cities.create');
+        return view('clients.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\CityRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CityRequest $request)
+    public function store(ClientRequest $request)
     {
-        $city = City::create($request->all());
+        $client = Client::create($request->all());
         return redirect()
-            ->route('cities.index')
-            ->withSuccess('La ciudad \''.$city->name.'\' se creo');
+            ->route('clients.index')
+            ->withSuccess('El cliente \''.$client->name.'\' se creo');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show(City $city)
+    public function show(Client $client)
     {
-        return view('cities.show', compact('city'));
+        return view('clients.show', compact('client'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit(City $city)
+    public function edit(Client $client)
     {
-        return view('cities.edit', compact('city'));
+        return view('clients.edit', compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\CityRequest  $request
-     * @param  \App\Models\City  $city
+     * @param  \App\Http\Requests\ClientRequest  $request
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(CityRequest $request, City $city)
+    public function update(ClientRequest $request, Client $client)
     {
-        $city->update($request->all());
+        $client->update($request->all());
         return redirect()
-            ->route('cities.index')
-            ->withSuccess('La ciudad \''.$city->name.'\' se ha sido actualizada');
+            ->route('clients.index')
+            ->withSuccess('El cliente \''.$client->name.'\' se ha sido actualizada');
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\City  $city
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(City $city)
+    public function destroy(Client $client)
     {
-        $name = $city->name;
+        $name = $client->name;
         try {
-            $city->forceDelete();
+            $client->forceDelete();
         } catch (\Throwable $e ){
             return redirect()
-                ->route('cities.index')
-                ->withDanger('La ciudad \''.$name.'\' ha se ha podido borrar');
+                ->route('clients.index')
+                ->withDanger('El cliente \''.$name.'\' ha se ha podido borrar');
         };
         return redirect()
-            ->route('cities.index')
-            ->withSuccess('La ciudad \''.$name.'\' ha sido borrada');
-
+            ->route('clients.index')
+            ->withSuccess('El cliente \''.$name.'\' ha sido borrada');
     }
 }

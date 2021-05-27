@@ -7,5 +7,5 @@ return [
         'users'   => 10,
     ],
     'queue'      => 10,
-    'pagination' => 5,
+    'pagination' => 10,
 ];

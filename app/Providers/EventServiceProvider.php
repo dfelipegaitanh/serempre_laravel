@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\City;
+use App\Models\Client;
 use App\Models\User;
 use App\Observers\CityObserver;
+use App\Observers\ClientObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -32,5 +34,6 @@ class EventServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         City::observe(CityObserver::class);
+        Client::observe(ClientObserver::class);
     }
 }

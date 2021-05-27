@@ -30,7 +30,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Codigo:</strong>
-                                        <input type="text" name="cod" value="{{ old('cod') }}" class="form-control @error('cod') is-invalid @enderror" placeholder="Codigo">
+                                        <input type="text" name="cod" value="{{ old('cod') }}" class="form-control @error('cod') is-invalid @enderror" placeholder="Codigo" maxlength="10">
 
                                         @error('cod')
                                         <span class="invalid-feedback" role="alert">

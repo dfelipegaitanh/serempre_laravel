@@ -5,13 +5,13 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">{{ __('Listado de Ciudades') }}</div>
+                    <div class="card-header">Listado de Clientes</div>
 
                     <div class="card-body">
                         @include('partials.messages')
 
                         <div class="pull-right mb-3">
-                            <a class="btn btn-block btn-success" href="{{ route('cities.create') }}"> Crear Ciudad</a>
+                            <a class="btn btn-block btn-success" href="{{ route('clients.create') }}"> Crear Cliente</a>
                         </div>
 
                         <table class="table table-bordered">
@@ -19,11 +19,12 @@
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Cod</th>
+                                <th>Ciudad</th>
                                 <th width="280px">Accion</th>
                             </tr>
-                            @each('cities.index.registro_tabla', $cities, 'city')
+                            @each('clients.index.registro_tabla', $clients, 'client')
                         </table>
-                        {!! $cities->links() !!}
+                        {!! $clients->links() !!}
 
                     </div>
                 </div>

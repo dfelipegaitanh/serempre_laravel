@@ -10,8 +10,10 @@ class Client extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'cod', 'city_id'];
+
     public function city(): BelongsTo
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class, 'city_id', 'id');
     }
 }
