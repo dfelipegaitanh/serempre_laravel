@@ -18,7 +18,7 @@ class UserObserver
      */
     public function created(User $user)
     {
-        if ($user->getAttribute('email') === 'felipe.gaitan.81@gmail.com') {
+        if (is_null($user->getAttribute('email_verified_at'))) {
             Password::broker()->sendResetLink(
                 ['email' => $user->getAttribute('email')]
             );

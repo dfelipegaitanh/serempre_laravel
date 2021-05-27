@@ -4,10 +4,10 @@ namespace App\Notifications;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Support\Facades\Lang;
 
-class RecuperarContrasenaNotification extends ResetPassword
+class RecuperarContrasenaNotification extends ResetPassword implements ShouldQueue
 {
     use Queueable;
 
