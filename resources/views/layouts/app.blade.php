@@ -96,15 +96,13 @@
         </main>
 
     </div>
-        <footer class="page-footer font-small blue mb-3" id="footer">
+    <footer class="page-footer font-small blue mb-3" id="footer">
 
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2021 Felipe Gaitan:
-                <a href="https://github.com/dfelipegaitanh"> https://github.com/dfelipegaitanh</a>
-            </div>
-            <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2021 Felipe Gaitan:
+            <a href="https://github.com/dfelipegaitanh"> https://github.com/dfelipegaitanh</a>
+        </div>
 
-        </footer>
+    </footer>
 
 </body>
 </html>
