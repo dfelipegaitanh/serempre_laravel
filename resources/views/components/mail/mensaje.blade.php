@@ -21,7 +21,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            © {{ date('Y') }} {{ env('APP_NAME')}}.
+            © 2021 Felipe Gaitan: <a href="https://github.com/dfelipegaitanh"> https://github.com/dfelipegaitanh</a>
         @endcomponent
     @endslot
 @endcomponent

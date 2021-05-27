@@ -22,12 +22,30 @@ class RecuperarContrasenaNotification extends ResetPassword implements ShouldQue
         return ['mail'];
     }
 
+    public function toMail($notifiable)
+    {
+        if (static::$toMailCallback) {
+            return call_user_func(static::$toMailCallback, $notifiable, $this->token);
+        }
+
+        if (static::$createUrlCallback) {
+            $url = call_user_func(static::$createUrlCallback, $notifiable, $this->token);
+        } else {
+            $url = route('password.reset', [
+                'token' => $this->token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ]);
+        }
+
+        return $this->buildMailMessage($url);
+    }
+
     protected function buildMailMessage($url)
     {
         return (new MailMessage)
             ->subject('Reestablecer Contraseña')
             ->action('Reestablecer Contraseña', $url)
-            ->line('Este link expirara en :count minutos.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')])
+            ->line('Este link expirara en '.config('auth.passwords.users.expire').' minutos.')
             ->markdown('mail.correo');
     }
 }
