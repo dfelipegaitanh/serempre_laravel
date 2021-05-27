@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CityRequest;
+use App\Http\Traits\busquedaTrait;
 use App\Models\City;
+use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
+
+    use busquedaTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +19,9 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::orderBy('id')
-            ->paginate(config('serempre.pagination'));
+        $cities = City::orderBy('id');
+        $this->agregarFiltros($cities);
+        $cities = $cities->paginate(config('serempre.pagination'));
 
         return view('cities.index', compact('cities'))
             ->with('i', (request()->input('page', 1) - 1) * config('serempre.pagination'));
@@ -94,7 +100,7 @@ class CityController extends Controller
         $name = $city->name;
         try {
             $city->forceDelete();
-        } catch (\Throwable $e ){
+        } catch (\Throwable $e) {
             return redirect()
                 ->route('cities.index')
                 ->withDanger('La ciudad \''.$name.'\' ha se ha podido borrar');
@@ -103,5 +109,17 @@ class CityController extends Controller
             ->route('cities.index')
             ->withSuccess('La ciudad \''.$name.'\' ha sido borrada');
 
+    }
+
+    public function busqueda(Request $request)
+    {
+        session()->flash('filtro', $request->get('filtro'));
+        return redirect()->route('cities.index');
+    }
+
+    public function clear()
+    {
+        session()->forget(['city_id', 'filtro']);
+        return redirect()->route('cities.index');
     }
 }

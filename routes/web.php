@@ -23,5 +23,10 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('cities', App\Http\Controllers\CityController::class);
+    Route::post('/cities/busqueda', [App\Http\Controllers\CityController::class, 'busqueda'])->name('cities.busqueda');
+    Route::get('/cities_clear', [App\Http\Controllers\CityController::class, 'clear'])->name('cities.index_clean');
+
     Route::resource('clients', App\Http\Controllers\ClientController::class);
+    Route::post('/clients/busqueda', [App\Http\Controllers\ClientController::class, 'busqueda'])->name('clients.busqueda');
+    Route::get('/clients_clear', [App\Http\Controllers\ClientController::class, 'clear'])->name('clients.index_clean');
 });

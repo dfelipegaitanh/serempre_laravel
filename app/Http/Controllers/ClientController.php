@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
+use App\Http\Traits\busquedaTrait;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+
+    use busquedaTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +19,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderBy('id')
-            ->paginate(config('serempre.pagination'));
+        $clients = Client::orderBy('id');
+        $this->agregarFiltros($clients);
+        $clients = $clients->paginate(config('serempre.pagination'));
 
         return view('clients.index', compact('clients'))
             ->with('i', (request()->input('page', 1) - 1) * config('serempre.pagination'));
@@ -95,7 +100,7 @@ class ClientController extends Controller
         $name = $client->name;
         try {
             $client->forceDelete();
-        } catch (\Throwable $e ){
+        } catch (\Throwable $e) {
             return redirect()
                 ->route('clients.index')
                 ->withDanger('El cliente \''.$name.'\' ha se ha podido borrar');
@@ -103,5 +108,18 @@ class ClientController extends Controller
         return redirect()
             ->route('clients.index')
             ->withSuccess('El cliente \''.$name.'\' ha sido borrada');
+    }
+
+    public function busqueda(Request $request)
+    {
+        session()->put('city_id', $request->get('city_id'));
+        session()->put('filtro', $request->get('filtro'));
+        return redirect()->route('clients.index');
+    }
+
+    public function clear()
+    {
+        session()->forget(['city_id', 'filtro']);
+        return redirect()->route('clients.index');
     }
 }

@@ -58,11 +58,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('cities.index') }}" >
+                                    <a class="dropdown-item" href="{{ route('cities.index_clean') }}" >
                                         {{ __('Ciudades') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('clients.index') }}" >
+                                    <a class="dropdown-item" href="{{ route('clients.index_clean') }}" >
                                         {{ __('Clientes') }}
                                     </a>
                                 </div>
