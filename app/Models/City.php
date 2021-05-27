@@ -10,6 +10,8 @@ class City extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'cod'];
+
     public function clients(): HasMany
     {
         return $this->hasMany(Client::class);

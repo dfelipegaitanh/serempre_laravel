@@ -9,8 +9,6 @@
 
                 <div class="card-body">
                     @include('partials.messages')
-
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>

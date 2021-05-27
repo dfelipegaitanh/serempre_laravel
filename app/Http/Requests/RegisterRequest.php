@@ -26,7 +26,6 @@ class RegisterRequest extends FormRequest
         return [
             'name'     => ['required', 'string', 'max:255'],
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
     }
 
@@ -36,8 +35,6 @@ class RegisterRequest extends FormRequest
             'email.unique'       => 'Este correo ya esta registrado',
             'email.email'        => 'Por favor ingresar una dirección de correo válida',
             'email.required'     => 'Por favor ingresar una dirección de correo válida',
-            // 'password.confirmed' => 'Las contraseñas no coinciden',
-            // 'password.min'       => 'La contraseña debe tener al menos :min caracteres',
         ];
     }
 }

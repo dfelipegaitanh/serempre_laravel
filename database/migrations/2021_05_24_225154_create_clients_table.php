@@ -19,9 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->foreignId('city_id')
                 ->nullable()
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->constrained();
             $table->timestamps();
         });
     }

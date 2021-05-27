@@ -20,3 +20,8 @@ Route::get('email/verify/{id}/{hash}', [App\Http\Controllers\Auth\VerificationCo
 Route::post('email/resend', [App\Http\Controllers\Auth\VerificationController::class ,'resend'])->name('verification.resend');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('cities', App\Http\Controllers\CityController::class);
+    Route::resource('clients', App\Http\Controllers\ClientController::class);
+});
