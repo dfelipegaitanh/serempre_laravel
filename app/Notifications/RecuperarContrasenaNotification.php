@@ -28,10 +28,10 @@ class RecuperarContrasenaNotification extends ResetPassword implements ShouldQue
             return call_user_func(static::$toMailCallback, $notifiable, $this->token);
         }
 
-            $url = route('password.reset', [
-                'token' => $this->token,
-                'email' => $notifiable->getEmailForPasswordReset(),
-            ]);
+        $url = route('password.reset', [
+            'token' => $this->token,
+            'email' => $notifiable->getEmailForPasswordReset(),
+        ]);
 
         return $this->buildMailMessage($url);
     }

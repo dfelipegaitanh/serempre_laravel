@@ -2,7 +2,13 @@
     <td>{{ $client->id }}</td>
     <td>{{ $client->name }}</td>
     <td>{{ $client->cod }}</td>
-    <td><a href="@if(isset($client->city->name) ) {{ route('cities.show' , ['city' => $client->city])  }} @else {{ '#' }} @endif">{{ $client->city->name ?? 'SIN CIUDAD' }}</a></td>
+    <td>
+        @if(isset($client->city->name) )
+            <a href="{{ route('cities.show' , ['city' => $client->city])  }}">{{ $client->city->name }}</a>
+        @else
+            SIN CIUDAD
+        @endif
+    </td>
     <td>
         <form action="{{ route('clients.destroy',$client->id) }}" method="POST">
             <a class="btn btn-success" href="{{ route('clients.show',$client->id) }}">Mostrar</a>
